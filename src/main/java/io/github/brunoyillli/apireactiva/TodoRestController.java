@@ -43,7 +43,7 @@ public class TodoRestController {
 	public Mono<Todo> atualizar(@PathVariable String id){
 		
 		return repository.findById(id)
-				.map(todoAtual -> new Todo(id, todoAtual.titulo(), todoAtual.descricao(), todoAtual.feito()))
+				.map(todoAtual -> new Todo(id, todoAtual.titulo(), todoAtual.descricao(), !todoAtual.feito()))
 				.flatMap(repository::save)
 				.onTerminateDetach();
 	}
